@@ -7,7 +7,10 @@ const initialState = {
   ...states.saving,
   ...states.loading,
   isLoggedIn: false,
-  user: {}
+  user: {
+    uid: "",
+    role: ""
+  }
 }
 
 export default (state = initialState, {type, payload}) => 

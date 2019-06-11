@@ -22,6 +22,7 @@ export const loadUser = (uid) => dispatch => {
   firestore.doc(`Users/${uid}`).get()
     .then(response => {
       let data = response.data()
+      console.log(data)
       dispatch(loadUserSuccess(data))
     })
     .catch(err => dispatch(loadUserFailure(err.message)))

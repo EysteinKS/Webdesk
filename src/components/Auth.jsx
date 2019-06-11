@@ -29,6 +29,7 @@ export default function Auth() {
   }, [user, initUser])
 
   const signIn = (email, password) => doSignIn(email, password)
+
   const createUser = (email, password) => {
     setInitUser(true)
     try {
@@ -105,7 +106,7 @@ export const SignIn = () => {
 }
 
 export const SignOut = () => {
-  return <button onClick={doSignOut}>Sign out</button>
+  return <button style={{margin: "2vh"}} onClick={doSignOut}>Sign out</button>
 }
 
 export const AuthHeader = () => {

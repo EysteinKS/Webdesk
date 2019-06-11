@@ -16,6 +16,7 @@ export default function useSignUpForm (state){
   return {
     handleSubmit,
     handleInputChange,
-    inputs
+    inputs,
+    setInputs
   };
 }
