@@ -3,7 +3,7 @@ import React from 'react'
 export default () => {
   return (
     <div>
-      <h3>Home</h3>      
+      <h3>Session</h3>
     </div>
   )
 }

@@ -1,0 +1,7 @@
+export const HOME = "/"
+export const PROFILE = "/profile"
+export const ADMIN = "/admin"
+export const RECEPTION = "/reception"
+export const SESSION = "/session"
+export const SIGN_IN = "/sign_in"
+export const SIGN_UP = "/sign_up"
