@@ -15,7 +15,7 @@ export default function Auth() {
 
   useEffect(() => {
     if(user){
-      console.log(user)
+      //console.log(user)
       if(initUser){
         try {
           dispatch(initializeUser(user.uid))

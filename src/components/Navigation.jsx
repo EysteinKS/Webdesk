@@ -32,8 +32,8 @@ export default function Navigation() {
 
   const authorized = pages.filter(page => {
     if (Array.isArray(page.roles)) {
-      console.log(`Checking if ${page.roles} contains ${role}`);
-      console.log("page.roles.includes(role): ", page.roles.includes(role));
+      //console.log(`Checking if ${page.roles} contains ${role}`);
+      //console.log("page.roles.includes(role): ", page.roles.includes(role));
       return page.roles.includes(role);
     }
     return true;
@@ -67,7 +67,7 @@ export default function Navigation() {
       {authorized.map(page => (
         <button
           key={page.name}
-          onClick={() => navigate(page.linkTo)}
+          onClick={() => navigate(page.linkTo === "/" ?  "/" : "/" + page.linkTo)}
           style={{ backgroundColor: "#333", borderColor: "#555" }}
         >
           <p style={{ color: "white" }}>{page.name}</p>

@@ -18,11 +18,11 @@ export const loadUserFailure = error => ({
 })
 
 export const loadUser = (uid) => dispatch => {
+  console.log("loading user with uid ", uid)
   dispatch(loadUserBegin())
   firestore.doc(`Users/${uid}`).get()
     .then(response => {
       let data = response.data()
-      console.log(data)
       dispatch(loadUserSuccess(data))
     })
     .catch(err => dispatch(loadUserFailure(err.message)))
