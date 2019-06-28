@@ -3,8 +3,10 @@ import socketClient from "socket.io-client";
 import ss from "socket.io-stream";
 import OpusToPCM from "opus-to-pcm";
 import { withWaveHeader, appendBuffer } from "../constants/waveHeader";
+import AudioBufferStream from "audio-buffer-stream"
 
 let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+//let offlineCtx = new window.offlineAudioContext()
 
 const url =
   process.env.NODE_ENV === "production"
@@ -98,6 +100,47 @@ export default function useSocket(onStream) {
 
   const stop = () => bufferSource && bufferSource.stop(0);
 
+  const streamAudioBufferToSocket = (stream) => {
+    console.log("Streaming audioBuffer to socket as PCM")
+    let socketStream = ss.createStream({ 
+      highWaterMark: 15360, 
+      allowHalfOpen: true,
+      objectMode:  false })
+
+    const contextToPCM = AudioBufferStream({
+      bitDepth: 16,
+      channels: 2,
+      chunkLength: 8359
+    })
+
+    /* let socketStream = ss.createStream()
+
+    const contextToPCM = AudioBufferStream({
+      bitDepth: 16,
+      channels: 2
+    }) */
+
+    let dataIsDecoded = false
+
+    stream.on("data", async data => {
+      //console.log("Data from stream: ", data)
+      await audioCtx.decodeAudioData(withWaveHeader(data, 2, 44100)).then(buffer => {
+        console.log("data from decodeAudioData: ", buffer)
+        contextToPCM.write(buffer)
+        if(!dataIsDecoded){
+          contextToPCM.pipe(socketStream)
+          dataIsDecoded = true
+        }
+      })
+    })
+
+    socketStream.on("data", data => {
+      console.log("Data from returnStream: ", data)
+    })
+    socketStream.on("end", () => console.log("socketStream ended!"))
+    ss(socket).emit("returnStream", socketStream)
+  }
+
   const processAudioData = (stream, streamSize) => {
     
     //TODO
@@ -161,9 +204,11 @@ export default function useSocket(onStream) {
 
       const getFromStream = true
       if(getFromStream){
-        ss(socket).on("track-stream", (stream, { stat }) => {
+        //ss(socket).on("track-stream", (stream, { stat }) => {
+        ss(socket).on("track-stream", (stream) => {
           console.log("stream: ", stream);
-          processAudioData(stream, stat.size)
+          streamAudioBufferToSocket(stream)
+          //processAudioData(stream, stat.size)
 
 /*           let writable = Writable(audioCtx.destination, {
             channels: 2,

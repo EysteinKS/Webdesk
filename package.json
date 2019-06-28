@@ -8,6 +8,7 @@
     "@material-ui/styles": "^4.1.0",
     "@reach/router": "^1.2.1",
     "arraybuffer-to-audiobuffer": "0.0.5",
+    "audio-buffer-stream": "^1.1.0",
     "audio-context": "^1.0.3",
     "audio-speaker": "^1.5.0",
     "firebase": "^6.1.1",
