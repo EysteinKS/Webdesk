@@ -1,9 +1,10 @@
 import React from 'react'
+import ActiveSession from "../components/ActiveSession"
 
 export default () => {
   return (
-    <div>
-      <h3>Session</h3>
+    <div style={{height: "94vh"}}>
+      <ActiveSession/>
     </div>
   )
 }

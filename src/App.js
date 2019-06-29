@@ -32,26 +32,24 @@ function App() {
   return (
     <div className="App">
       <Navigation/>
-      <header className="App-header">
+      <div className="App-content">
         {user 
           ? <AuthPage/>
           : <Auth/> }
-      </header>
+      </div>
     </div>
   );
 }
 
 const AuthPage = () => {
   return(
-    <div>
-      <Router primary={false}>
-        <Home path={routes.HOME}/>
-        <Admin path={routes.ADMIN}/>
-        <Profile path={routes.PROFILE}/>
-        <Reception path={routes.RECEPTION}/>
-        <Session path={routes.SESSION}/>
-      </Router>
-    </div>
+    <Router primary={false}>
+      <Home path={routes.HOME}/>
+      <Admin path={routes.ADMIN}/>
+      <Profile path={routes.PROFILE}/>
+      <Reception path={routes.RECEPTION}/>
+      <Session path={routes.SESSION}/>
+    </Router>
   )
 }
 
