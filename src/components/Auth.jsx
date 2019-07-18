@@ -26,7 +26,7 @@ export default function Auth() {
         }
       }
     }
-  }, [user, initUser])
+  }, [user, initUser, dispatch])
 
   const signIn = (email, password) => doSignIn(email, password)
 

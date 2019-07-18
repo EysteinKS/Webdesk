@@ -6,9 +6,9 @@ import { useSelector } from "react-redux"
 import Dialog from "@material-ui/core/Dialog"
 
 export default () => {
-  const avatarUrl = useSelector(state => state.auth.user.avatarUrl)
-  const [currentModal, setCurrentModal] = useState(false)
-  const closeModal = () => setCurrentModal(false)
+  const avatarUrl = useSelector((state: any) => state.auth.user.avatarUrl)
+  const [currentModal, setCurrentModal] = useState(null as string | null)
+  const closeModal = () => setCurrentModal(null)
 
   return <>
     <div style={{display: "grid", placeItems: "center"}}>
@@ -22,7 +22,7 @@ export default () => {
       </Dialog></>
 }
 
-const ProfileModal = ({type}) => {
+const ProfileModal = ({ type }: { type: string | null}) => {
   if(type === "avatar"){
     return <AvatarModal/>
   }
@@ -30,7 +30,7 @@ const ProfileModal = ({type}) => {
 }
 
 const AvatarModal = () => {
-  const avatarUrl = useSelector(state => state.auth.user.avatarUrl)
+  const avatarUrl = useSelector((state: any) => state.auth.user.avatarUrl)
   const [url, setUrl] = useState(avatarUrl)
   console.log(url)
   useEffect(() => {
@@ -47,9 +47,14 @@ const AvatarModal = () => {
   )
 }
 
-export const Avatar = ({ url, setModalOpen }) => {
-  const imgStyle={width: "20vw", maxHeight: "30vh", position: "relative"}
-  const buttonStyle={right: "40%", position: "absolute"}
+interface AvatarProps {
+  url: string,
+  setModalOpen: any
+}
+
+export const Avatar = ({ url, setModalOpen }: AvatarProps) => {
+  const imgStyle: any = {width: "20vw", maxHeight: "30vh", position: "relative" }
+  const buttonStyle: any = {right: "40%", position: "absolute"}
   const handleMouseHover = () => {
     console.log("Setting hovering to ", !hovering)
     setHovering(!hovering)

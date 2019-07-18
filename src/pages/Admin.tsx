@@ -3,7 +3,7 @@ import { navigate } from "@reach/router"
 import { useSelector } from "react-redux"
 
 export default () => {
-  const role = useSelector(state => state.auth.user.role)
+  const role = useSelector((state: any) => state.auth.user.role)
 
   useEffect(() => {
     if(role !== "admin"){

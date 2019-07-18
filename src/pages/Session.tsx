@@ -1,5 +1,5 @@
 import React from 'react'
-import ActiveSession from "../components/ActiveSession"
+import ActiveSession from "../components/Session/ActiveSession"
 
 export default () => {
   return (
