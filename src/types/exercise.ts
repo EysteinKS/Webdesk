@@ -1,17 +1,18 @@
 export interface IExercise {
   name: string;
   owner: string;
-  publicid: string;
   description: string;
   tags: ITag[];
-  reps: IReps[];
+  sets: ISet[];
   steps: IStep[];
   isFreeWeight: boolean;
   weights: IWeight[];
+  isCustom?: boolean
 }
 
 export interface IPublicExercise extends IExercise {
   publicRating: number;
+  publicid: string;
   publicComments: any[];
 }
 
@@ -35,6 +36,10 @@ export interface ISessionExercise extends IPrivateExercise {
   sessionRating: number,
   sessionComments: any[]
 }
+
+export type IExerciseTypes = (
+  IExercise | IPrivateExercise | IPublicExercise | ISessionExercise
+)
 
 export interface ITag {
   id: string;

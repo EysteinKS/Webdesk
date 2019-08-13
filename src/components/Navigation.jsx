@@ -9,9 +9,9 @@ import { makeStyles, createStyles } from "@material-ui/styles";
 const useStyles = makeStyles(theme =>
   createStyles({
     nav: {
-      position: "absolute",
+      position: "relative",
       top: 0,
-      height: "7vh"
+      height: "5vh"
     }
   })
 );
@@ -32,8 +32,6 @@ export default function Navigation() {
 
   const authorized = pages.filter(page => {
     if (Array.isArray(page.roles)) {
-      console.log(`Checking if ${page.roles} contains ${role}`);
-      console.log("page.roles.includes(role): ", page.roles.includes(role));
       return page.roles.includes(role);
     }
     return true;
@@ -49,7 +47,7 @@ export default function Navigation() {
         style={{
           width: "100vw",
           backgroundColor: "#333",
-          height: "6vh",
+          height: "5vh",
           border: "solid 1px #555"
         }}
       />
@@ -61,7 +59,7 @@ export default function Navigation() {
         display: "grid",
         gridTemplateColumns: `repeat(${pagesLength}, ${gridFraction}%)`,
         width: "100vw",
-        height: "6vh"
+        height: "5vh"
       }}
     >
       {authorized.map(page => (
@@ -70,7 +68,7 @@ export default function Navigation() {
           onClick={() => navigate(page.linkTo)}
           style={{ backgroundColor: "#333", borderColor: "#555" }}
         >
-          <p style={{ color: "white" }}>{page.name}</p>
+          <p style={{ color: "white", margin: "0" }}>{page.name}</p>
         </button>
       ))}
     </nav>

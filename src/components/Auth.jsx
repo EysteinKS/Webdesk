@@ -15,13 +15,11 @@ export default function Auth() {
 
   useEffect(() => {
     if(user){
-      console.log(user)
       if(initUser){
         try {
           dispatch(initializeUser(user.uid))
           setInitUser(false)
         } catch(e) {
-          console.log(e.message)
           setError(e.message)
         }
       }

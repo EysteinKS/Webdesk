@@ -1,6 +1,5 @@
 import React from "react";
 import { ExerciseWrapper } from "../Styled"
-import { SessionWrapper } from "../Styled"
 
 export default () => {
   return (      
@@ -27,7 +26,7 @@ export default () => {
                         */}
 
         <div className="exerciseGuide">
-          <p>Guide</p>
+          <button>Guide</button>
           <div className="exerciseGuideVideo">
             {/**
                                 Video kommer her

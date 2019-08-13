@@ -6,15 +6,12 @@ export const ExerciseWrapper = styled.div`
   background-color: gray;
   border-radius: 10px;
   place-items: center;
-  grid-column: 2 / 3;
-  grid-columns: 2 / 4;
+  margin-bottom: 5vh;
 `
 
 export const SessionWrapper = styled.div`
-  display: grid;
-  grid-template-columns:  1fr 1fr 1fr;
-  grid-template-rows: 10px 1fr 1fr 1fr;
   border-radius: 10px;
   place-items: center;
+  margin: 5vh 10vw;
 `
 

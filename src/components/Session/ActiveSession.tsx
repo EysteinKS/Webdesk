@@ -4,7 +4,7 @@ import SessionExercise from "./SessionExercise"
 import { SessionWrapper } from "../Styled";
 
 const ActiveSession = () => {
-  const listOfExercises = [1]
+  const listOfExercises = [1, 2, 3]
   let Element: any = SessionExercise
   return (
       <SessionWrapper>
