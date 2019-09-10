@@ -1,8 +1,8 @@
 import { NavigationTypes, pageTypes } from "../actions/session";
-import { SessionContext } from "../types";
+import { SessionContext, GymContext } from "../types/context";
 import { getPageState } from "../pageStates";
 
-const navigationReducer = (type: NavigationTypes, draft: SessionContext): SessionContext => {
+const navigationReducer = (type: NavigationTypes, draft: GymContext): GymContext => {
   switch(type){
     case pageTypes.OPEN_NEW_SESSION:
         let newSessionState = getPageState("NEW_SESSION")

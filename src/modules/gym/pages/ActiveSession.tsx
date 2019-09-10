@@ -2,12 +2,13 @@ import React, { useEffect } from "react"
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import { DigitalFont } from "../styles";
-import ExerciseList from "../components/ExerciseList";
+import ExerciseList from "../components/ExerciseList/ExerciseList";
 import { useSessionContext } from "../context";
 import { useSelector } from "react-redux";
 import RootState from "../../../redux/types";
 import { changeButtonAction } from "../actions/buttons";
-import { actionCreator } from "../actions";
+import { AllStates } from "../types/states";
+import Exercise from "../components/Exercise/Exercise";
 
 const Session = styled.section`
   height: 78vh;
@@ -18,7 +19,10 @@ const Session = styled.section`
 `
 
 const ActiveSession = () => {
-  const [{}, dispatch] = useSessionContext()
+  const [context, dispatch] = useSessionContext()
+  const state = context.state as AllStates
+  const currentExercise = state.exercises.currentExercise
+
   const uid = useSelector((state: RootState) => state.auth.user.uid)
 
   useEffect(() => {
@@ -30,9 +34,12 @@ const ActiveSession = () => {
   return(
     <>
     <ActiveSessionHeader/>
-    <Session>
-      <ExerciseList/>
-    </Session>
+      <Session>
+        {(currentExercise)
+          ? <Exercise/>
+          : <ExerciseList/>
+        }
+      </Session>
     <Footer/>
     </>
   )

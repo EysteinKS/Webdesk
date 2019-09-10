@@ -1,8 +1,8 @@
-import { SessionContext } from "../types";
 import { CHANGE_MAIN_BUTTON, CHANGE_BUTTON_ACTION } from "../actions/buttons";
 import { AnyAction } from "redux";
+import { GymContext } from "../types/context";
 
-const buttonReducer = (type: string, draft: SessionContext, action?: AnyAction): SessionContext => {
+const buttonReducer = (type: string, draft: GymContext, action?: AnyAction): GymContext => {
   switch(type){
     case CHANGE_MAIN_BUTTON:
       if(action) draft.buttonTypes.mainButton = action.payload

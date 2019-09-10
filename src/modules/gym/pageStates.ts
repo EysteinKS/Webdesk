@@ -1,6 +1,7 @@
-import { SessionContext, TSessionPages, PageContext } from "./types";
+import { TSessionPages } from "./types";
 import { buttonActions } from "./states";
 import { activeActions } from "./actions/activeSession";
+import { GymContext, SessionContext } from "./types/context"
 
 const dashboardActions = {
   NEW_SESSION: buttonActions.NEW_SESSION,
@@ -9,8 +10,9 @@ const dashboardActions = {
   OPEN_SESSION: buttonActions.OPEN_SESSION
 }
 
-const dashboardPage: PageContext = {
+const dashboardPage: GymContext = {
   page: "DASHBOARD",
+  state: {},
   buttonTypes: {
     mainButton: "NEW_SESSION",
     featuredButton: "SELECT_SESSION"
@@ -23,19 +25,22 @@ const newSessionActions = {
   OPEN_BROWSE: buttonActions.OPEN_BROWSE
 }
 
-const newSessionPage: PageContext = {
+const newSessionPage: GymContext = {
   page: "NEW_SESSION",
+  state: {},
   buttonTypes: {
     mainButton: "OPEN_SESSION"
   },
   buttonActions: newSessionActions
 }
 
-const activeSessionPage: PageContext = {
+const activeSessionPage: SessionContext = {
   page: "ACTIVE_SESSION",
   state: {
-    exerciseList: [],
-    isExerciseOpen: false
+    exercises: {
+      queuedExercises: [],
+      currentExercise: null
+    }
   },
   buttonTypes: {
     mainButton: "ADD_EXERCISE",
@@ -45,7 +50,7 @@ const activeSessionPage: PageContext = {
   buttonActions: activeActions
 }
 
-const allPages: {[key: string]: PageContext} = {
+const allPages: {[key: string]: GymContext} = {
   DASHBOARD: dashboardPage,
   NEW_SESSION: newSessionPage,
   ACTIVE_SESSION: activeSessionPage

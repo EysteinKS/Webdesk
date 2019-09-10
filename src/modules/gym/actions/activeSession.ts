@@ -1,4 +1,5 @@
 import { actionCreator } from "./index";
+import { AllDefinedExercises } from "../types/exercises";
 
 export type ActiveSessionTypes = (
   "BEGIN_SESSION" | "PAUSE_SESSION" |
@@ -18,10 +19,14 @@ export const activeTypes = {
   QUIT_SESSION: "QUIT_SESSION",
   ADD_EXERCISE: "ADD_EXERCISE",
   CREATE_CUSTOM_EXERCISE: "CREATE_CUSTOM_EXERCISE",
+  CREATE_ENDURANCE_EXERCISE: "CREATE_ENDURANCE_EXERCISE",
+  CREATE_TARGET_EXERCISE: "CREATE_TARGET_EXERCISE",
+  CREATE_REPETITION_EXERCISE: "CREATE_REPETITION_EXERCISE",
   LOAD_EXERCISE: "LOAD_EXERCISE",
   COPY_EXERCISE: "COPY_EXERCISE",
   REMOVE_EXERCISE: "REMOVE_EXERCISE",
   OPEN_EXERCISE: "OPEN_EXERCISE",
+  SAVE_EXERCISE: "SAVE_EXERCISE",
   CLOSE_EXERCISE: "CLOSE_EXERCISE",
   BEGIN_EXERCISE: "BEGIN_EXERCISE",
   FINISH_EXERCISE: "FINISH_EXERCISE"
@@ -29,5 +34,18 @@ export const activeTypes = {
 
 export const activeActions = {
   ADD_EXERCISE: () => actionCreator(activeTypes.ADD_EXERCISE),
-  CREATE_CUSTOM_EXERCISE: () => actionCreator(activeTypes.CREATE_CUSTOM_EXERCISE)
+  REMOVE_EXERCISE: (index: number) => actionCreator(activeTypes.REMOVE_EXERCISE, index),
+  CREATE_CUSTOM_EXERCISE: () => actionCreator(activeTypes.CREATE_CUSTOM_EXERCISE),
+  CREATE_ENDURANCE_EXERCISE: (owner = "") => actionCreator(activeTypes.CREATE_ENDURANCE_EXERCISE, owner),
+  CREATE_TARGET_EXERCISE: (owner = "") => actionCreator(activeTypes.CREATE_TARGET_EXERCISE, owner),
+  CREATE_REPETITION_EXERCISE: (owner = "") => actionCreator(activeTypes.CREATE_REPETITION_EXERCISE, owner),
+  OPEN_EXERCISE: (index: number) => actionCreator(activeTypes.OPEN_EXERCISE, index),
+  SAVE_EXERCISE: (payload: { exercise: AllDefinedExercises, index: number}) => actionCreator(activeTypes.SAVE_EXERCISE, payload),
+  CLOSE_EXERCISE: () => actionCreator(activeTypes.CLOSE_EXERCISE)
+}
+
+export const createDefinedActions = {
+  ENDURANCE: activeActions.CREATE_ENDURANCE_EXERCISE,
+  TARGET: activeActions.CREATE_TARGET_EXERCISE,
+  REPETITION: activeActions.CREATE_REPETITION_EXERCISE
 }

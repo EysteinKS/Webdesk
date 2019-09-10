@@ -1,6 +1,7 @@
 import React from 'react'
 import useSessionButton from '../hooks/useSessionButton';
 import styled from 'styled-components';
+import { useSessionContext } from '../context';
 
 const StyledButton = styled.button`
   height: 50px;
@@ -18,8 +19,19 @@ const MainButton = () => {
     return stringArr[0]
   }, [type])
 
+  const [context] = useSessionContext()
+  const disabled = React.useMemo(() => {
+    if("exercises" in context.state){
+      const queue = context.state.exercises.queuedExercises
+      if(queue.length && (["BLANK", "CUSTOM"].includes(queue[queue.length - 1].type))){
+        return true
+      }
+    }
+    return false
+  }, [context.state])
+
   return (
-    <StyledButton onClick={() => onClick()}>
+    <StyledButton disabled={disabled} onClick={() => onClick()}>
       {content}
     </StyledButton>
   )

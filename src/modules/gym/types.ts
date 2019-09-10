@@ -16,6 +16,7 @@ export interface Session extends ISession {
     queuedExercises: ISessionExercise[];
     finishedExercises: ISessionExercise[];
   }
+  paused: Array<{timePaused: Date, timeResumed: Date | null}>
 }
 
 export type TMainButtonTypes = (

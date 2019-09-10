@@ -1,13 +1,13 @@
-import React, {createContext, useContext, useReducer} from "react"
+import React, { createContext, useContext, useReducer } from "react"
 import { StateProvider, Match } from "../../constants/context";
-import { SessionContext, SessionContextValue } from "./types";
 import { dashboardActions } from "./states";
 import reducer from "./reducers";
 import { AnyAction } from "redux";
+import { GymContext, ContextValue } from "./types/context";
 
 export const MatchState = Match
 
-export const initialSession: SessionContext = {
+export const initialSession: GymContext = {
   page: "DASHBOARD",
   state: {
 
@@ -20,9 +20,9 @@ export const initialSession: SessionContext = {
 }
 
 //SESSION
-export const SessionCtx = createContext<SessionContextValue | null>(null)
+export const SessionCtx = createContext<ContextValue | null>(null)
 
-export const useSessionContext = () => useContext(SessionCtx) as SessionContextValue
+export const useSessionContext = () => useContext(SessionCtx) as ContextValue
 
 export const useSessionContextWithLog = (): [any, React.Dispatch<AnyAction>]  => {
   const context = useContext(SessionCtx) as any
@@ -37,7 +37,6 @@ export const SessionProvider: React.FC = ({ children }) => {
     </SessionCtx.Provider>
   )
 }
-//SESSION END
 
 //EXERCISE
 const exerciseContext =  createContext({})
